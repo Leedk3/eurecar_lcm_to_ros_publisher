@@ -11,7 +11,18 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   ackermann_msgs
   message_generation
+  pcl_ros
 )
+
+find_package(PCL 1.7 REQUIRED)
+include_directories(${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
+
+message(STATUS "PCL_INCLUDE_DIRS:" ${PCL_INCLUDE_DIRS})
+message(STATUS "PCL_LIBRARY_DIRS:" ${PCL_LIBRARY_DIRS})
+message(STATUS "PCL_DEFINITIONS:" ${PCL_DEFINITIONS})
+
 
 ########################
 ## message generation ##
@@ -47,6 +58,7 @@ include_directories(include
 
 add_library(eurecar_lcm_to_ros_publisher
   src/lcmtoros_can_t.cpp
+  src/lcmtoros_pos_t.cpp
 )
 
 add_executable(${PROJECT_NAME}_node ${sources} )
@@ -58,6 +70,7 @@ target_link_libraries(${PROJECT_NAME}_node
    eurecar_lcm_to_ros_publisher
    ${catkin_LIBRARIES}
    lcm
+   ${PCL_LIBRARIES}
 )
 
 

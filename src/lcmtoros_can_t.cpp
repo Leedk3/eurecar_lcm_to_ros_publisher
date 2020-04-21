@@ -20,7 +20,7 @@ void LCMToROS_CAN_T::lcmCallback(const lcm::ReceiveBuffer* rbuf,
 {
     ROS_DEBUG("Received message on channel ");
     can_t_msg.header.stamp = ros::Time::now();
-    can_t_msg.header.frame_id = "/base_footprint";
+    can_t_msg.header.frame_id = "/base_link";
     can_t_msg.yaw_rate = msg -> yaw_rate;
     can_t_msg.mdps_torque = msg -> mdps_torque;
     can_t_msg.mdps_str_ang = msg -> mdps_str_ang;
